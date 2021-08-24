@@ -10,7 +10,9 @@ namespace ShopApp.DataAccess.Abstract
 {
     public interface IProductDal:IRepository<Product>
     {
-      // IProductDal IRepository içerisindeki bütün metotlara sahip
+        // IProductDal IRepository içerisindeki bütün metotlara sahip
+        IEnumerable<Product> GetPopularProducts();
+        // Populer productları getirir 
     }
 
 }
