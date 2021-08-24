@@ -37,6 +37,11 @@ namespace ShopApp.DataAccess.Concrete.MySql
             throw new NotImplementedException();
         }
 
+        public IEnumerable<Product> GetPopularProducts()
+        {
+            throw new NotImplementedException();
+        }
+
         public void Update(Product entity)
         {
             throw new NotImplementedException();
