@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 namespace ShopApp.DataAccess.Concrete.EfCore
 {           //ctrl. diyince aşağıdaki metotlerı otomatik getirdi 
     public class EfCoreProductDal : EfCoreGenericRepository<Product, ShopContext>, IProductDal
-    {
+    {   //businuss katmanı bu metodu kullanıyor...
         public IEnumerable<Product> GetPopularProducts()
         {
             throw new NotImplementedException();
