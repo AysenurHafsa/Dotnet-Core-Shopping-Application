@@ -10,44 +10,60 @@ using System.Threading.Tasks;
 namespace ShopApp.DataAccess.Concrete.EfCore
 {
     public class EfCoreGenericRepository<T, TContext> : IRepository<T>
-        where T : class // T bir class olucak
+        where T : class
         where TContext : DbContext, new()  // TContext ise DbContext ten türüyen bir yapı olucak
     {
         public void Create(T entity)
         {
-            //biz ekledik
-            using (var context = new TContext())
+            using (var context =new TContext())
             {
-                
                 context.Set<T>().Add(entity);
                 context.SaveChanges();
             }
-            throw new NotImplementedException();
         }
 
         public void Delete(T entity)
         {
-            throw new NotImplementedException();
+            using (var context = new TContext())
+            {
+                context.Set<T>().Remove(entity);
+                context.SaveChanges();
+            }
         }
 
-        public IQueryable<T> GetAll(Expression<Func<T, bool>> filter)
+        public IEnumerable <T> GetAll(Expression<Func<T, bool>> filter = null)
         {
-            throw new NotImplementedException();
+            using (var context = new TContext())
+            {
+                return filter == null
+                    ? context.Set<T>().ToList()
+                    : context.Set<T>().Where(filter).ToList();
+            }
         }
 
         public T GetById(int id)
         {
-            throw new NotImplementedException();
-        }
+            using (var context = new TContext())
+            {
+                return context.Set<T>().Find(id);
+            }
+         }
 
         public T GetOne(Expression<Func<T, bool>> filter)
         {
-            throw new NotImplementedException();
+            using (var context = new TContext())
+            {
+                return context.Set<T>().Where(filter).SingleOrDefault();
+            }
         }
 
         public void Update(T entity)
         {
-            throw new NotImplementedException();
+            using (var context = new TContext())
+            {
+                context.Entry(entity).State = EntityState.Modified;
+                context.SaveChanges();
+            }
         }
     }
 }

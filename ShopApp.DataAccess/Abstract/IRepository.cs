@@ -12,7 +12,7 @@ namespace ShopApp.DataAccess.Abstract
         T GetById(int id);
         //kullanıcı bir id bilgisi gönderdiği zaman product tablosundan bulup geriye deger döndüren  metot
         T GetOne(Expression<Func<T, bool>> filter);
-        IQueryable<T> GetAll(Expression<Func<T, bool>> filter);
+        IEnumerable<T> GetAll(Expression<Func<T, bool>> filter = null);
 
         void Create(T entity);
 
