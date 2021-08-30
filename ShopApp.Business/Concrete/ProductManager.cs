@@ -1,13 +1,8 @@
 ﻿using ShopApp.Business.Abstract;
 using ShopApp.DataAccess.Abstract;
-using ShopApp.DataAccess.Concrete.EfCore;
 using ShopApp.Entities;
-
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ShopApp.Business.Concrete
 {
