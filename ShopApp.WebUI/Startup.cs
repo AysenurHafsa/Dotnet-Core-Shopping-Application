@@ -31,8 +31,9 @@ namespace ShopApp.WebUI
             // IProduct, EFCoreProductDal 
             // IProduct, MySqlProductDal 
             */
-            services.AddScoped<IProductDal, MemoryProductDal>();
-            services.AddScoped<IPoductService, ProductManager>();
+            //
+            services.AddScoped<IProductDal, MemoryProductDal>(); //IProductDal çaðýrýnca MemoryProductDal gelir
+            services.AddScoped<IPoductService, ProductManager>(); //IProductService çaðýrýnca ProductManager gelicek
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
