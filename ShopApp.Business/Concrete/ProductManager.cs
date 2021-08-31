@@ -6,7 +6,7 @@ using System.Linq;
 
 namespace ShopApp.Business.Concrete
 {
-    public class ProductManager : IPoductService
+    public class ProductManager : IProductService
     {
         //  EfCoreProductDal _productDal = new EfCoreProductDal();   //bunu silip bağımlılığımı kaldırmak için 
         // alttaki satırları ekledik(1,2,3)
