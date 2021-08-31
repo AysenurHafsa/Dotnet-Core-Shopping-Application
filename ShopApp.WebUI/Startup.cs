@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -35,10 +36,14 @@ namespace ShopApp.WebUI
             services.AddScoped<IProductDal, MemoryProductDal>(); //IProductDal çaðýrýnca MemoryProductDal gelir
             services.AddScoped<IProductService, ProductManager>(); //IProductService çaðýrýnca ProductManager gelicek
 
-            services.AddMvc();
-           
+            services.AddMvc()
+                .SetCompatibilityVersion(Microsoft.AspNetCore.Mvc.CompatibilityVersion.Version_3_0) ;
+            //MVC Fremawork unu uygulamaya ekliyor ve versiyonlar arttýðý zaman versiyon uyumlluðu için gerekli kodlarý ekliyoruz.
+        }
 
-            //MVC Fremawork unu uygulamaya ekliyor
+        private void SetCompatibilityVersion(CompatibilityVersion compatibilityVersion)
+        {
+            throw new NotImplementedException();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -48,12 +53,8 @@ namespace ShopApp.WebUI
             {
                 app.UseDeveloperExceptionPage();
             }
-            /*
-             * else
-            {
-                app.UseExceptionHandler("/Error");
-            }
-            */
+            app.UseMvcWithDefaultRoute();
+
             app.UseStaticFiles();
 
             app.UseRouting();
