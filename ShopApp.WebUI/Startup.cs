@@ -40,20 +40,21 @@ namespace ShopApp.WebUI
                 .SetCompatibilityVersion(Microsoft.AspNetCore.Mvc.CompatibilityVersion.Version_3_0) ;
             //MVC Fremawork unu uygulamaya ekliyor ve versiyonlar arttýðý zaman versiyon uyumlluðu için gerekli kodlarý ekliyoruz.
         }
-
+        /*
         private void SetCompatibilityVersion(CompatibilityVersion compatibilityVersion)
         {
             throw new NotImplementedException();
         }
-
+        */
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostEnvironment env)
         {
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
             }
-            app.UseMvcWithDefaultRoute();
+           // app.UseMvcWithDefaultRoute();
+
 
             app.UseStaticFiles();
 
@@ -61,9 +62,11 @@ namespace ShopApp.WebUI
 
             app.UseAuthorization();
 
-            app.UseEndpoints(endpoints =>
+            app.UseEndpoints(endpoint =>
             {
-                endpoints.MapRazorPages();
+                endpoint.MapControllerRoute(
+                      name: "default",
+                      pattern: "{controller=Home}/{action=Index}/{id?}");
             });
         }
     }
