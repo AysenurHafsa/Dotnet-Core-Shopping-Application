@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ShopApp.Business.Abstract
 {
-    public interface IPoductService
+    public interface IProductService
     {
         Product GetById(int id);
 

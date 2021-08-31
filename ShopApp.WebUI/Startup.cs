@@ -33,7 +33,12 @@ namespace ShopApp.WebUI
             */
             //
             services.AddScoped<IProductDal, MemoryProductDal>(); //IProductDal çaðýrýnca MemoryProductDal gelir
-            services.AddScoped<IPoductService, ProductManager>(); //IProductService çaðýrýnca ProductManager gelicek
+            services.AddScoped<IProductService, ProductManager>(); //IProductService çaðýrýnca ProductManager gelicek
+
+            services.AddMvc();
+           
+
+            //MVC Fremawork unu uygulamaya ekliyor
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -43,11 +48,12 @@ namespace ShopApp.WebUI
             {
                 app.UseDeveloperExceptionPage();
             }
-            else
+            /*
+             * else
             {
                 app.UseExceptionHandler("/Error");
             }
-
+            */
             app.UseStaticFiles();
 
             app.UseRouting();
