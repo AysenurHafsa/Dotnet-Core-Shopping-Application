@@ -18,10 +18,13 @@ namespace ShopApp.DataAccess.Concrete.EfCore
         }
 
 
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {   
+            modelBuilder.Entity<ProductCategory>()
+                .HasKey(c => new { c.CategoryId, c.ProductId });  // 2 tane birincil anahtar atadık
 
+        }
 
-       
-       
         public DbSet<Product> Products { get; set; }
 
         public DbSet<Category> Categories { get; set; }
