@@ -13,6 +13,8 @@ namespace ShopApp.Business.Abstract
 
         List<Product> GetAll();
 
+        List<Product> GetPolularProducts();
+
         void Create(Product entity);
 
         void Update(Product entity);
