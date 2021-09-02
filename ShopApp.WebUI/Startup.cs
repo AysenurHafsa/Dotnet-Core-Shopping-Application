@@ -7,6 +7,7 @@ using Microsoft.Extensions.Hosting;
 using ShopApp.Business.Abstract;
 using ShopApp.Business.Concrete;
 using ShopApp.DataAccess.Abstract;
+using ShopApp.DataAccess.Concrete.EfCore;
 using ShopApp.DataAccess.Concrete.Memory;
 using System;
 using System.Collections.Generic;
@@ -33,11 +34,11 @@ namespace ShopApp.WebUI
             // IProduct, MySqlProductDal 
             */
             //
-            services.AddScoped<IProductDal, MemoryProductDal>(); //IProductDal çaðýrýnca MemoryProductDal gelir
+            services.AddScoped<IProductDal, EfCoreProductDal>(); //IProductDal çaðýrýnca MemoryProductDal gelir
             services.AddScoped<IProductService, ProductManager>(); //IProductService çaðýrýnca ProductManager gelicek
 
             services.AddMvc()
-                .SetCompatibilityVersion(Microsoft.AspNetCore.Mvc.CompatibilityVersion.Version_3_0) ;
+                .SetCompatibilityVersion(Microsoft.AspNetCore.Mvc.CompatibilityVersion.Version_3_0);
             //MVC Fremawork unu uygulamaya ekliyor ve versiyonlar arttýðý zaman versiyon uyumlluðu için gerekli kodlarý ekliyoruz.
         }
         /*
@@ -52,22 +53,23 @@ namespace ShopApp.WebUI
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                SeedDatabase.Seed();  //SeedDatabase sýnýfý içindeki Seed metodunu çaðýrdýk (sadece geliþtirme aþamasýnda çaðýrýlmasý gereken metotdur)
+                                      // app.UseMvcWithDefaultRoute();
+
+
+                app.UseStaticFiles();
+
+                app.UseRouting();
+
+                app.UseAuthorization();
+
+                app.UseEndpoints(endpoint =>
+                {
+                    endpoint.MapControllerRoute(
+                          name: "default",
+                          pattern: "{controller=Home}/{action=Index}/{id?}");
+                });
             }
-           // app.UseMvcWithDefaultRoute();
-
-
-            app.UseStaticFiles();
-
-            app.UseRouting();
-
-            app.UseAuthorization();
-
-            app.UseEndpoints(endpoint =>
-            {
-                endpoint.MapControllerRoute(
-                      name: "default",
-                      pattern: "{controller=Home}/{action=Index}/{id?}");
-            });
         }
     }
 }
