@@ -65,10 +65,5 @@ namespace ShopApp.DataAccess.Concrete.EfCore
                 context.SaveChanges();
             }
         }
-
-        //List<T> IRepository<T>.GetAll(Expression<Func<T, bool>> filter)
-        //{
-        //    throw new NotImplementedException();
-        //}
     }
 }
