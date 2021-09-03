@@ -29,12 +29,17 @@ namespace ShopApp.Business.Concrete
 
         public List<Product> GetAll()
         {
-            return _productDal.GetAll().ToList(); //kayıt istiyorsak GetAll alır toliste gönderir
+            return _productDal.GetAll();//kayıt istiyorsak GetAll alır toliste gönderir
         }
 
         public Product GetById(int id)
         {
             return _productDal.GetById(id); //tek bir kaydı istiyorsak GetById çağırıp id gönderdik 
+        }
+
+        public List<Product> GetPopularProducts()
+        {
+            return _productDal.GetAll();
         }
 
         public void Update(Product entity)
