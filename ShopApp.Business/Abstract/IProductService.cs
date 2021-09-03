@@ -13,7 +13,7 @@ namespace ShopApp.Business.Abstract
 
         List<Product> GetAll();
 
-        List<Product> GetPolularProducts();
+        List<Product> GetPopularProducts();
 
         void Create(Product entity);
 
