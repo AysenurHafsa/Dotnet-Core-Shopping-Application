@@ -1,4 +1,4 @@
-﻿@model ShopApp.WebUI.Models.ProductListModel
+﻿@model ProductListModel
 
 @*@{ ViewData["Title"] = "Magic Shopping"; }
 
@@ -16,7 +16,7 @@
 
             <partial name="_slider" />
 
-            <div class="row mt-3">
+            <div class="row">
                 @foreach (var product in Model.Products)
                 {
                       <partial name="_product" for="@product" />}
