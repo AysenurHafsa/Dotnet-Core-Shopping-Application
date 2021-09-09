@@ -15,10 +15,12 @@ namespace ShopApp.Entities
 
         public string ImageUrl { get; set; }
 
+        public string Description { get; set; }
+
         public decimal Price { get; set; }
         // fiyat alanı
 
         public List<ProductCategory> ProductCategory { get; set; }
-
+        //public object ProductCategories { get; set; }
     }
 }

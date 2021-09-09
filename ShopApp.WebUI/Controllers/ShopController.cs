@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using ShopApp.Business.Abstract;
+using ShopApp.Entities;
 using ShopApp.WebUI.Models;
 using System;
 using System.Collections.Generic;
@@ -17,15 +18,24 @@ namespace ShopApp.WebUI.Controllers
         {
             _productService = productService;
         }
-        public IActionResult Index()
+        public IActionResult Details(int? id) //urun detay bilgisine yonlendirir
         {
-            return View();
+            if (id == null)
+            {
+                return NotFound();
+            }
+            Product product=_productService.GetById((int)id);
+            if (product == null)
+            {
+                return NotFound();
+            }
+            return View(product);
         }
         public IActionResult List()
         {
             return View(new ProductListModel()  // productListModel donduruyor (HOmeController dan aldık)
             {
-                Products = _productService.GetAll() //GetAll= tum urunler
+                Products = _productService.GetAll() //GetAll= tum urunler listeleniyor
 
             });
         }
