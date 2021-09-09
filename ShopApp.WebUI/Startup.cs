@@ -1,6 +1,5 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -8,12 +7,7 @@ using ShopApp.Business.Abstract;
 using ShopApp.Business.Concrete;
 using ShopApp.DataAccess.Abstract;
 using ShopApp.DataAccess.Concrete.EfCore;
-using ShopApp.DataAccess.Concrete.Memory;
 using ShopApp.WebUI.Middlewares;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace ShopApp.WebUI
 {
@@ -65,11 +59,34 @@ namespace ShopApp.WebUI
 
                 app.UseAuthorization();
 
-                app.UseEndpoints(endpoint =>
+                app.UseEndpoints(endpoints =>
                 {
-                    endpoint.MapControllerRoute(
-                          name: "default",
-                          pattern: "{controller=Home}/{action=Index}/{id?}");
+
+                    endpoints.MapControllerRoute(
+                        name: "default",
+                        pattern: "{controller=Home}/{action=Index}/{id?}");
+
+
+                    //burayý ekledik
+                    endpoints.MapControllerRoute(
+                        name: "products",
+                        pattern: "{products}/{category?}",
+                        defaults: new { controller = "shop", action = "list" }
+                        );
+
+                    endpoints.MapControllerRoute(
+                            name: "adminProducts",
+                            pattern: "admin/products",
+                            defaults: new { controller = "admin", action = "index"}
+                        );
+                    endpoints.MapControllerRoute(
+                            name: "adminProducts",
+                            pattern: "admin/products/{id?}",
+                            defaults: new { controller = "admin", action = "editproduct"}
+
+                        );
+                    
+
                 });
             }
         }
