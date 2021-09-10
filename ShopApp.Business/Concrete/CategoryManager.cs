@@ -1,4 +1,5 @@
 ﻿using ShopApp.Business.Abstract;
+using ShopApp.DataAccess.Abstract;
 using ShopApp.Entities;
 using System;
 using System.Collections.Generic;
@@ -8,8 +9,15 @@ using System.Threading.Tasks;
 
 namespace ShopApp.Business.Concrete
 {
-    class CategoryManager : ICategoryService
+     public class CategoryManager : ICategoryService
     {
+        private ICategoryDal _categoryDal;
+
+        public CategoryManager(ICategoryDal categoryDal)   //Consractor
+        {
+            _categoryDal = categoryDal;
+        }
+
         public void Create(Category entity)
         {
             throw new NotImplementedException();
@@ -22,7 +30,7 @@ namespace ShopApp.Business.Concrete
 
         public List<Category> GetAll()
         {
-            throw new NotImplementedException();
+            return _categoryDal.GetAll(); 
         }
 
         public void Update(Category entity)
