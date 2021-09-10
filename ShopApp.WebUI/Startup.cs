@@ -31,6 +31,9 @@ namespace ShopApp.WebUI
             //
             services.AddScoped<IProductDal, EfCoreProductDal>(); //IProductDal çaðýrýnca MemoryProductDal gelir
             services.AddScoped<IProductService, ProductManager>(); //IProductService çaðýrýnca ProductManager gelicek
+           
+            services.AddScoped<ICategoryDal, EfCoreCategoryDal>(); 
+            services.AddScoped<ICategoryService, CategoryManager>();
 
             services.AddMvc()
                 .SetCompatibilityVersion(Microsoft.AspNetCore.Mvc.CompatibilityVersion.Version_3_0);
