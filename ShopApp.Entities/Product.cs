@@ -20,7 +20,7 @@ namespace ShopApp.Entities
         public decimal Price { get; set; }
         // fiyat alanı
 
-        public List<ProductCategory> ProductCategory { get; set; }
+        public List<ProductCategory> ProductCategories { get; set; }
         //public object ProductCategories { get; set; }
     }
 }

@@ -20,7 +20,7 @@ namespace ShopApp.DataAccess.Concrete.EfCore
             {   //burada  ProductCategory ve Category bilgileri sorgusu databaseye yükleniyor.
                 return context.Products
                     .Where(i => i.Id == id)
-                    .Include(i => i.ProductCategory)
+                    .Include(i => i.ProductCategories)
                     .ThenInclude(i => i.Category)
                     .FirstOrDefault();
             }
@@ -28,7 +28,19 @@ namespace ShopApp.DataAccess.Concrete.EfCore
 
         public List<Product> GetProductsByCategory(string category)
         {
-            throw new NotImplementedException();
+            using (var context = new ShopContext())
+            {
+                var products = context.Products.AsQueryable();
+
+                if (!string.IsNullOrEmpty(category))
+                {
+                    products = products
+                        .Include(i => i.ProductCategories)
+                        .ThenInclude(i => i.Category)
+                        .Where(i => i.ProductCategories.Any(a => a.Category.Name.ToLower() == category.ToLower()));
+                }
+                return products.ToList();
+            }
         }
 
 
