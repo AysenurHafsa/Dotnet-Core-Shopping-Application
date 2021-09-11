@@ -15,7 +15,7 @@ namespace ShopApp.Business.Abstract
 
         List<Product> GetAll();
 
-        List<Product> GetProductsByCategory(string category);
+        List<Product> GetProductsByCategory(string category, int page, int pageSize);
 
         void Create(Product entity);
 
