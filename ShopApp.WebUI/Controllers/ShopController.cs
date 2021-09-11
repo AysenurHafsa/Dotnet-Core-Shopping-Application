@@ -32,7 +32,7 @@ namespace ShopApp.WebUI.Controllers
             return View(new ProductDetailsModel() 
             { 
                 Product = product,
-                Categories = product.ProductCategory.Select(i => i.Category).ToList()
+                Categories = product.ProductCategories.Select(i => i.Category).ToList()
                 // category bilgilerini link ile categories'e aktarıyor.
             });
         }
