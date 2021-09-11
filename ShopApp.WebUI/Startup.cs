@@ -70,7 +70,7 @@ namespace ShopApp.WebUI
                         pattern: "{controller=Home}/{action=Index}/{id?}");
 
 
-                    //burayý ekledik
+                    //Raute ekledik.
                     endpoints.MapControllerRoute(
                         name: "products",
                         pattern: "{products}/{category?}",
