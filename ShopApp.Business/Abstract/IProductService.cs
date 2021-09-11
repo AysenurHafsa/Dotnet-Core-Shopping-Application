@@ -15,7 +15,7 @@ namespace ShopApp.Business.Abstract
 
         List<Product> GetAll();
 
-        List<Product> GetPopularProducts();
+        List<Product> GetProductsByCategory(string category);
 
         void Create(Product entity);
 
