@@ -36,11 +36,12 @@ namespace ShopApp.WebUI.Controllers
                 // category bilgilerini link ile categories'e aktarıyor.
             });
         }
-        public IActionResult List()
+        public IActionResult List(string category, int page=1)
         {
+            const int pageSize = 3;
             return View(new ProductListModel()  // productListModel donduruyor (HOmeController dan aldık)
             {
-                Products = _productService.GetAll() //GetAll= tum urunler listeleniyor
+                Products = _productService.GetProductsByCategory(category, page, pageSize) //kategorilere gore tum urunler listeleniyor
 
             });
         }
