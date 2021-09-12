@@ -19,7 +19,9 @@ namespace ShopApp.WebUI.ViewComponents
         public IViewComponentResult Invoke()
         {
             return View(new CategoryListViewModel() {    //bütün kategori bilgileri icin model tanımladık.
-               Categories = _categoryService.GetAll() // Categories'e service den gelen GetAll metodunu set ettik.
+             
+                SelectedCategory =RouteData.Values["category"]?.ToString(),
+                Categories = _categoryService.GetAll() // Categories'e service den gelen GetAll metodunu set ettik.
             }); 
         }
     }

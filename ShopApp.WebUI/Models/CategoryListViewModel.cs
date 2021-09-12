@@ -8,6 +8,7 @@ namespace ShopApp.WebUI.Models
 {
     public class CategoryListViewModel
     {
+        public string SelectedCategory { get; set; } //secilmis kategori bilgisini tutan yapı
         public List<Category> Categories { get; set; }
     }
 }
