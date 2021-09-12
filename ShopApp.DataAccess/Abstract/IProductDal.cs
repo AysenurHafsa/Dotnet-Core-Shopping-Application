@@ -15,6 +15,8 @@ namespace ShopApp.DataAccess.Abstract
 
         
         Product GetProductDetails(int id);
+
+        int GetCountByCategory(string category);
     }
 
 }

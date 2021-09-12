@@ -41,6 +41,14 @@ namespace ShopApp.WebUI.Controllers
             const int pageSize = 3;
             return View(new ProductListModel()  // productListModel donduruyor (HOmeController dan aldık)
             {
+                PageInfo = new PageInfo() 
+                {
+                    //modelimizi doldurup sayfalama icin ozellikleri ekledik
+                    TotalItems = _productService.GetCountByCategory(category),
+                    CurrentPage=page,
+                    ItemsPerPage=pageSize,
+                    CurrentCategory=category
+                },
                 Products = _productService.GetProductsByCategory(category, page, pageSize) //kategorilere gore tum urunler listeleniyor
 
             });
