@@ -15,6 +15,8 @@ namespace ShopApp.WebUI.Models
         public int CurrentPage { get; set; } // o anki hangi sayfadayız bilgisini saklar
 
         public string CurrentCategory { get; set; } // o andaki aktif olan kategori bilgisini tutar
+       
+        public object BaseLink { get; internal set; }
 
         public int TotalPages() //PageInfo uzerinden gonderilen bilgilere gore kac tane sayfa uretmek istedigimizi bu metotdan alicaz
         {
