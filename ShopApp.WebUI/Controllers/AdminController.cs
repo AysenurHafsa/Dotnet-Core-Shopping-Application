@@ -17,9 +17,12 @@ namespace ShopApp.WebUI.Controllers
             _productService = productService;
         }
 
-        public IActionResult Index()
+        public IActionResult Index()  
         {
-            return View();
+            return View(new ProductListModel()
+            { 
+                Products = _productService.GetAll() //productlar listeleniyor
+            });
         }
 
         [HttpGet]     //form u getiricek metot(parametresiz)
