@@ -1,0 +1,46 @@
+﻿
+@{ 
+    ViewData["Title"] = "CreateProduct";
+}
+
+<h1>Create Product</h1>
+<hr />
+
+<div class="row">
+    <div class="col-md-8">    @*Product taki alanlarla alakalı kısımları doldurduk ve  bu kısım admincontrol daki producta gidiyor.*@
+
+        <form asp-controller="Admin" asp-action="CreateProduct" method="post">   @*Action yazmak yerine TagHelper'ları kullandık.*@
+            <div class="form-group-row">
+                <label class="col-md-2 col-form-label">Product Name</label>
+                <div class="col-md-10">
+                    <input type="type" name="Name" value="" class="form-control" />
+                </div>
+            </div>
+            <div class="form-group-row">
+                <label class="col-md-2 col-form-label">Image Url</label>
+                <div class="col-md-10">
+                    <input type="type" name="Image Url" value="" class="form-control" />
+                </div>
+            </div>
+            <div class="form-group-row">
+                <label class="col-md-2 col-form-label">Description</label>
+                <div class="col-md-10">
+                    <textarea id="editor" name="Description" class="form-control"></textarea>
+                </div>
+            </div>
+            <div class="form-group-row">
+                <label class="col-md-2 col-form-label">Price</label>
+                <div class="col-md-10">
+                    <input type="type" name="Price" value="" class="form-control" />
+                </div>
+            </div>
+            <div class="form-group-row">
+                <div class="col-md-10 offset-md-2">
+                    <button type="submit" value="Save Product" class="btn btn-primary"></button>
+                </div>
+            </div>
+
+        
+        </form>
+    </div>
+</div>

@@ -14,9 +14,9 @@ namespace ShopApp.WebUI.Controllers
             return View();
         }
 
-        [HttpGet]
+        [HttpGet]     //form u getiricek metot(parametresiz)
 
-        public IActionResult CreateProduct( )
+        public IActionResult CreateProduct( )  
         {
             return View();
         }
@@ -25,7 +25,7 @@ namespace ShopApp.WebUI.Controllers
 
         public IActionResult CreateProduct(Product entity)
         {
-            return View();
+            return Redirect("Index"); //kullanıcıyı yeni bir sayfaya:index e gönderiyoruz
         }
     }
 }
