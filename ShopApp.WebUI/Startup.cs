@@ -47,15 +47,24 @@ namespace ShopApp.WebUI
         */
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostEnvironment env)
-        {
+        {    /*
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+            
                 SeedDatabase.Seed();  //SeedDatabase sýnýfý içindeki Seed metodunu çaðýrdýk (sadece geliþtirme aþamasýnda çaðýrýlmasý gereken metotdur)
                                       // app.UseMvcWithDefaultRoute();
+            */
+            if (env.IsDevelopment())
+            {
+                app.UseDeveloperExceptionPage();
+            }
+            else
+            {
+                app.UseExceptionHandler("/Home/Error");
+            }
 
-
-                app.UseStaticFiles();  //wwwroot'u dýþarýya açýyoruz
+            app.UseStaticFiles();  //wwwroot'u dýþarýya açýyoruz
                 app.CustomStaticFiles(); //middlewaare 
 
                 app.UseRouting();
@@ -65,24 +74,25 @@ namespace ShopApp.WebUI
                 app.UseEndpoints(endpoints =>
                 {
                     //Raute ekledik.
- 
-                    endpoints.MapControllerRoute(
-                            name: "adminProducts",
-                            pattern: "admin/products",
-                            defaults: new { controller = "Admin", action = "Index"}
-                        );
-                    endpoints.MapControllerRoute(
-                            name: "adminProducts",
-                            pattern: "admin/products/{id?}",
-                            defaults: new { controller = "Admin", action = "Edit"}
-
-                        );
-                    endpoints.MapControllerRoute(
-                       name: "products",
-                       pattern: "{products}/{category?}",
-                       defaults: new { controller = "shop", action = "list" }
+                    /*
+                   endpoints.MapControllerRoute(
+                           name: "adminProducts",
+                           pattern: "admin/products",
+                           defaults: new { controller = "Admin", action = "Index"}
                        );
 
+                   endpoints.MapControllerRoute(
+                      name: "products",
+                      pattern: "{products}/{category?}",
+                      defaults: new { controller = "shop", action = "list" }
+                      ); 
+                   */
+                    endpoints.MapControllerRoute(
+                         name: "adminProducts",
+                         pattern: "admin/products/{id?}",
+                         defaults: new { controller = "Admin", action = "Edit" }
+
+                     );
                     endpoints.MapControllerRoute(
                         name: "default",
                         pattern: "{controller=Home}/{action=Index}/{id?}"
@@ -92,4 +102,4 @@ namespace ShopApp.WebUI
             }
         }
     }
-}
+
