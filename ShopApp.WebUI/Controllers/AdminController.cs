@@ -17,17 +17,17 @@ namespace ShopApp.WebUI.Controllers
             _productService = productService;
         }
 
-        public IActionResult Index()  
+        public IActionResult Index()
         {
             return View(new ProductListModel()
-            { 
+            {
                 Products = _productService.GetAll() //productlar listeleniyor
             });
         }
 
         [HttpGet]     //form u getiricek metot(parametresiz)
 
-        public IActionResult CreateProduct( )  
+        public IActionResult CreateProduct()
         {
             return View();
         }
@@ -41,8 +41,8 @@ namespace ShopApp.WebUI.Controllers
                 //product icerisindeki degerleri tanımladık
                 Name = model.Name,
                 Price = model.Price,
-                Description =model.Description,
-                ImageUrl =model.ImageUrl
+                Description = model.Description,
+                ImageUrl = model.ImageUrl
             };
             _productService.Create(entity); //kayıt islemi yapıyor
 
@@ -51,7 +51,7 @@ namespace ShopApp.WebUI.Controllers
 
         public IActionResult Edit(int? id)  //edit sayfasina yonlendiren metodumuz
         {
-            if (id==null)   //kullanıcı id gondermesse kullanıcıya sayfa bulunamadı yönlendirmesi yapıyor.
+            if (id == null)   //kullanıcı id gondermesse kullanıcıya sayfa bulunamadı yönlendirmesi yapıyor.
             {
                 return NotFound();
             }
@@ -63,7 +63,7 @@ namespace ShopApp.WebUI.Controllers
             }
 
             var model = new ProductModel()
-            {   
+            {
                 //burada bilgiyi model icinde paketliyoruz ve sayfaya gonderiyoruz.
                 Id = entity.Id,
                 Name = entity.Name,
@@ -77,12 +77,12 @@ namespace ShopApp.WebUI.Controllers
         public IActionResult Edit(ProductModel model)
         {
             var entity = _productService.GetById(model.Id);
-            
-            if (entity==null)
+
+            if (entity == null)
             {
                 return NotFound();
 
-            } 
+            }
             //sayfadan gelen bilgilerle database den aldigimiz enttity nin alanlarını burada set ediyoruz
             entity.Name = model.Name;
             entity.Description = model.Description;
@@ -92,6 +92,22 @@ namespace ShopApp.WebUI.Controllers
             _productService.Update(entity); //set islemi bittikten sonra Update yi cagirip entityi gonderiyoruz.
 
             return RedirectToAction("Index");  //raute yonlendirme yaptık (ToAction)
+        }
+
+        [HttpPost]
+        public IActionResult Delete(int productId) //silme islemi yapan metot
+        {
+            var entity = _productService.GetById(productId);
+
+            if (entity == null)
+            {
+                return NotFound();   
+            }
+            _productService.Delete(entity);
+
+           TempData["DeleteMessage"] = "The product has been deleted successfully.";
+
+            return RedirectToAction("Index");
         }
     }
 }
