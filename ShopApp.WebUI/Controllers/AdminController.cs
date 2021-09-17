@@ -17,7 +17,7 @@ namespace ShopApp.WebUI.Controllers
             _productService = productService;
         }
 
-        public IActionResult Index()
+        public IActionResult ProductList()
         {
             return View(new ProductListModel()
             {
@@ -49,7 +49,7 @@ namespace ShopApp.WebUI.Controllers
             return RedirectToAction("Index"); //kullanıcıyı yeni bir sayfaya yonlendiriyoruz //raute yonlendirme yaptık (ToAction)
         }
 
-        public IActionResult Edit(int? id)  //edit sayfasina yonlendiren metodumuz
+        public IActionResult EditProduct(int? id)  //edit sayfasina yonlendiren metodumuz
         {
             if (id == null)   //kullanıcı id gondermesse kullanıcıya sayfa bulunamadı yönlendirmesi yapıyor.
             {
@@ -74,7 +74,7 @@ namespace ShopApp.WebUI.Controllers
             return View(model);
         }
         [HttpPost]
-        public IActionResult Edit(ProductModel model)
+        public IActionResult EditProduct(ProductModel model)
         {
             var entity = _productService.GetById(model.Id);
 
@@ -95,7 +95,7 @@ namespace ShopApp.WebUI.Controllers
         }
 
         [HttpPost]
-        public IActionResult Delete(int productId) //silme islemi yapan metot
+        public IActionResult DeleteProduct(int productId) //silme islemi yapan metot
         {
             var entity = _productService.GetById(productId);
 
