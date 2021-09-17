@@ -1,15 +1,15 @@
 ﻿@model ProductModel
 @{ 
-    ViewData["Title"] = "CreateProduct";
+    ViewData["Title"] = "AddProduct";
 }
 
-<h1>Create Product</h1>
+<h1>Add Product</h1>
 <hr />
 
 <div class="row">
     <div class="col-md-8">    @*Product taki alanlarla alakalı kısımları doldurduk ve  bu kısım admincontrol daki producta gidiyor.*@
 
-        <form asp-controller="Admin" asp-action="CreateProduct" method="post">   @*Action yazmak yerine TagHelper'ları kullandık.*@
+        <form asp-controller="Admin" asp-action="AddProduct" method="post">   @*Action yazmak yerine TagHelper'ları kullandık.*@
             <div class="form-group row">
                 <label asp-for="Name" class="col-md-2 col-form-label"></label>
                 <div class="col-md-10">
