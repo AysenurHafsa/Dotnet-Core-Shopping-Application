@@ -119,5 +119,47 @@ namespace ShopApp.WebUI.Controllers
               Categories =_categoryService.GetAll()  //category servisinden gelen kategorileri categories e atarız
             });
         }
+        [HttpGet]
+        public IActionResult AddCategory()
+        {
+            return View();
+        }
+        [HttpPost]
+        public IActionResult AddCategory(CategoryModel model)
+        {
+            var entity = new Category()
+            {
+                Name = model.Name //modelden gelen name alıyor
+            };
+            _categoryService.Create(entity);  //category service uzerinden create ile entity i gönderiyoruz
+
+            return RedirectToAction("CategoryList"); //kullanıcıyı categorylist actiona gidip ekledigi urunu gorur
+        }
+            //edit sayfalarını ekliyoruz
+
+        [HttpGet]
+        public IActionResult EditCategory(int id)
+        {
+            var entity = _categoryService.GetById(id); //gonderdigimiz category deki bilgiyi alıyoruz
+
+            return View( new CategoryModel() //kullanıcıya categoryi model olarak gönderiyoruz 
+            { 
+                Id=entity.Id,   // id ve name i entityden gelen bilgiyle dolduruyoruz model olarak sayfaya gönderiyoruz
+                Name =entity.Name
+            });
+        }
+        [HttpPost]
+        public IActionResult EditCategory(CategoryModel model)
+        {
+            var entity = _categoryService.GetById(model.Id); //sayfadan gelen model bilgisiyle databasedeki ilgili modeli aldık
+            if (entity==null)
+            {
+                return NotFound();
+            }
+            entity.Name = model.Name;
+            _categoryService.Update(entity); //Updateye sectigimiz ve yeni bilgilerle doldurdugumuz yeni entityi gönderiyoruz
+
+            return RedirectToAction("CategoryList"); ; //islemi categoryliste gonderiyoruz
+        }
     }
 }
