@@ -78,7 +78,7 @@ namespace ShopApp.WebUI
                    endpoints.MapControllerRoute(
                            name: "adminProducts",
                            pattern: "admin/products",
-                           defaults: new { controller = "Admin", action = "Index"}
+                           defaults: new { controller = "Admin", action = "ProductList"}
                        );
 
                    endpoints.MapControllerRoute(
@@ -90,7 +90,7 @@ namespace ShopApp.WebUI
                     endpoints.MapControllerRoute(
                          name: "adminProducts",
                          pattern: "admin/products/{id?}",
-                         defaults: new { controller = "Admin", action = "Edit" }
+                         defaults: new { controller = "Admin", action = "EditProduct" }
 
                      );
                     endpoints.MapControllerRoute(
