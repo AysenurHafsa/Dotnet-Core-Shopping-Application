@@ -49,7 +49,7 @@ namespace ShopApp.WebUI.Controllers
             };
             _productService.Create(entity); //kayıt islemi yapıyor
 
-            return RedirectToAction("Index"); //kullanıcıyı yeni bir sayfaya yonlendiriyoruz //raute yonlendirme yaptık (ToAction)
+            return RedirectToAction("ProductList"); //kullanıcıyı yeni bir sayfaya yonlendiriyoruz //raute yonlendirme yaptık (ToAction)
         }
 
         public IActionResult EditProduct(int? id)  //edit sayfasina yonlendiren metodumuz
@@ -94,7 +94,7 @@ namespace ShopApp.WebUI.Controllers
 
             _productService.Update(entity); //set islemi bittikten sonra Update yi cagirip entityi gonderiyoruz.
 
-            return RedirectToAction("Index");  //raute yonlendirme yaptık (ToAction)
+            return RedirectToAction("ProductList");  //raute yonlendirme yaptık (ToAction)
         }
 
         [HttpPost]
@@ -102,21 +102,18 @@ namespace ShopApp.WebUI.Controllers
         {
             var entity = _productService.GetById(productId);
 
-            if (entity == null)
+            if (entity != null)
             {
-                return NotFound();   
+                _productService.Delete(entity);
             }
-            _productService.Delete(entity);
 
-           TempData["DeleteMessage"] = "The product has been deleted successfully.";
-
-            return RedirectToAction("Index");
+            return RedirectToAction("ProductList");
         }
         public IActionResult CategoryList()
         {
-            return View( new CategoryListModel()
-            { 
-              Categories =_categoryService.GetAll()  //category servisinden gelen kategorileri categories e atarız
+            return View(new CategoryListModel()
+            {
+                Categories = _categoryService.GetAll()  //category servisinden gelen kategorileri categories e atarız
             });
         }
         [HttpGet]
@@ -135,24 +132,24 @@ namespace ShopApp.WebUI.Controllers
 
             return RedirectToAction("CategoryList"); //kullanıcıyı categorylist actiona gidip ekledigi urunu gorur
         }
-            //edit sayfalarını ekliyoruz
+        //edit sayfalarını ekliyoruz
 
         [HttpGet]
         public IActionResult EditCategory(int id)
         {
             var entity = _categoryService.GetById(id); //gonderdigimiz category deki bilgiyi alıyoruz
 
-            return View( new CategoryModel() //kullanıcıya categoryi model olarak gönderiyoruz 
-            { 
-                Id=entity.Id,   // id ve name i entityden gelen bilgiyle dolduruyoruz model olarak sayfaya gönderiyoruz
-                Name =entity.Name
+            return View(new CategoryModel() //kullanıcıya categoryi model olarak gönderiyoruz 
+            {
+                Id = entity.Id,   // id ve name i entityden gelen bilgiyle dolduruyoruz model olarak sayfaya gönderiyoruz
+                Name = entity.Name
             });
         }
         [HttpPost]
         public IActionResult EditCategory(CategoryModel model)
         {
             var entity = _categoryService.GetById(model.Id); //sayfadan gelen model bilgisiyle databasedeki ilgili modeli aldık
-            if (entity==null)
+            if (entity == null)
             {
                 return NotFound();
             }
@@ -160,6 +157,19 @@ namespace ShopApp.WebUI.Controllers
             _categoryService.Update(entity); //Updateye sectigimiz ve yeni bilgilerle doldurdugumuz yeni entityi gönderiyoruz
 
             return RedirectToAction("CategoryList"); ; //islemi categoryliste gonderiyoruz
+        }
+        [HttpPost]
+        public IActionResult DeleteCategory(int categoryId)  //categorylist sayfasındaki delete butonu icin gerekli metot umuz.
+        {
+            var entity = _categoryService.GetById(categoryId);
+
+            if (entity != null)
+            {
+                _categoryService.Delete(entity);
+            }
+
+
+            return RedirectToAction("CategoryList");
         }
     }
 }
