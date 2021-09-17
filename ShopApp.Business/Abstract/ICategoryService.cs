@@ -9,6 +9,8 @@ namespace ShopApp.Business.Abstract
 {
     public interface ICategoryService
     {
+         Category GetById(int id); // editcategory icin grekli metodu ekledik
+
          List<Category> GetAll();
 
         void Create(Category entity);
