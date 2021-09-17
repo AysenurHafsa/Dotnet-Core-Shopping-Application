@@ -56,5 +56,10 @@ namespace ShopApp.Business.Concrete
         {
             _productDal.Update(entity); // update işlemleri 
         }
+
+        public void Update(Category entity)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

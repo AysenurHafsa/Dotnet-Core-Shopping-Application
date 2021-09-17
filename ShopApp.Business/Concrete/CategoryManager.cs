@@ -20,12 +20,12 @@ namespace ShopApp.Business.Concrete
 
         public void Create(Category entity)
         {
-            throw new NotImplementedException();
+            _categoryDal.Create(entity); //categoryDal uzerinden createye entity gonderiyoruz
         }
 
         public void Delete(Category entity)
         {
-            throw new NotImplementedException();
+            _categoryDal.Delete(entity);
         }
 
         public List<Category> GetAll()
@@ -33,9 +33,14 @@ namespace ShopApp.Business.Concrete
             return _categoryDal.GetAll(); 
         }
 
+        public Category GetById(int id)  // ekledigimiz metot , id icin implement ettik
+        {
+            return _categoryDal.GetById(id); //istedigimiz id ye karsilik gelen bilgiyi alıyoruz
+        }
+
         public void Update(Category entity)
         {
-            throw new NotImplementedException();
+            _categoryDal.Update(entity);
         }
     }
 }
