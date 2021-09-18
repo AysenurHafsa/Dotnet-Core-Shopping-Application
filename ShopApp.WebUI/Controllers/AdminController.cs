@@ -29,15 +29,16 @@ namespace ShopApp.WebUI.Controllers
         }
 
         [HttpGet]     //form u getiricek metot(parametresiz)
-
-        public IActionResult CreateProduct()
+        public IActionResult AddProduct()
         {
-            return View();
+            ViewBag.AllCategories = _categoryService.GetAll();
+
+            var emptyModel = new ProductModel();
+            return View(emptyModel);
         }
 
         [HttpPost]   //post metodu
-
-        public IActionResult CreateProduct(ProductModel model)  //sayfadan model aldıyoruz
+        public IActionResult AddProduct(ProductModel model)  //sayfadan model aldıyoruz
         {
             var entity = new Product()
             {
