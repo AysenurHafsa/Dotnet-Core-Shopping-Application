@@ -73,14 +73,13 @@ namespace ShopApp.WebUI
 
                 app.UseEndpoints(endpoints =>
                 {
-                    //Raute ekledik.
-                    /*
+                    //Raute ekledik                    
                    endpoints.MapControllerRoute(
                            name: "adminProducts",
                            pattern: "admin/products",
                            defaults: new { controller = "Admin", action = "ProductList"}
                        );
-
+                    /*
                    endpoints.MapControllerRoute(
                       name: "products",
                       pattern: "{products}/{category?}",
