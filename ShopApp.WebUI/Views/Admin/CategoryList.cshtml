@@ -7,38 +7,35 @@
 <hr />
 
 
-@if (Model.Categories.Count() > 0)@*direk tabloyu yazmak yerine  modelin icinde products var mı diye kontrol eden if yapısı *@
+@if (Model.Categories.Count() > 0) @*Direk tabloyu yazmak yerine modelin icinde products var mı diye kontrol eden if yapısı*@
 {
+    // render categories
     <table class="table table-bordered">
         <thead>
             <tr>
-                <td style="width:30px;">Id</td>
-                <td style="width:100px;">Name</td>
-                <td style="width:150px;"></td>
+                <td><strong>ID</strong></td>
+                <td><strong>Name</strong></td>
             </tr>
         </thead>
         <tbody>
-            @foreach (var item in Model.Categories)@*Model icerisinden gelen bilgilerle dolduruluyor*@
+            @foreach (var item in Model.Categories)  @*Model icerisinden gelen bilgilerle dolduruluyor*@
             {
                 <tr>
                     <td>@item.Id</td>
                     <td>@item.Name</td>
                     <td>
-                        @*buton bilgisi category olarak düzeltildi*@
-                        <a class="btn btn-primary btn-sm mr-2" href="/admin/editcategory/@item.Id">Edit</a>  
-                        <form action="/admin/deletecategory" method="post" style="display:inline;">
+                        <a class="btn btn-primary btn-sm mr-2" href="/admin/editcategory/@item.Id">Edit</a>
+                        <form asp-controller="admin" asp-action="deletecategory" type="submit" style="display: inline;">
                             <input type="hidden" name="categoryId" value="@item.Id" />
-                            <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                            <button type="submit" class="btn btn-danger btn-sm" value="">Delete</button>
                         </form>
 
                     </td>
                 </tr>
             }
         </tbody>
-        <tr>
-            <td></td>
-        </tr>
     </table>
+
 }
 else
 {

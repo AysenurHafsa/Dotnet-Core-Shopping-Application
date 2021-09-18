@@ -6,46 +6,58 @@
 <h1>Edit Product</h1>
 <hr />
 
-<div class="row">
-    <div class="col-md-8">
-        @*Product taki alanlarla alakalı kısımları doldurduk ve  bu kısım admincontrol daki producta gidiyor.*@
+<form asp-controller="Admin" asp-action="EditProduct" type="submit">
+    <div class="row">
+        <!--Is katmanindan geliyorsa hata mesaji olustur-->
+        @if (ViewBag.ErrorMessage != null)
+        {
+            <div class="text-danger">
+                @ViewBag.ErrorMessage
+            </div>}
 
-        <form asp-controller="Admin" asp-action="Edit" method="post">  @*Action yazmak yerine TagHelper'ları kullandık.*@
+        <div class="col-9 product-information">
+            <!--Product ID-->
+            <input type="hidden" value="@Model.Id" name="Id" />
 
-            <input type="hidden" name="Id" value="@Model.Id" />  @*urun Id bilgisini aldık*@
+            <!--Product Name-->
             <div class="form-group row">
-                <label asp-for="Name" class="col-md-2 col-form-label"></label>
-                <div class="col-md-10">
-                    <input asp-for="Name" value="@Model.Name" class="form-control" />
-                </div>
-            </div>
-            <div class="form-group row">
-                <label asp-for="ImageUrl" class="col-md-2 col-form-label"></label>
-                <div class="col-md-10">
-                    <input asp-for="ImageUrl" value="@Model.ImageUrl" class="form-control" />
-                </div>
-            </div>
-            <div class="form-group row">
-                <label asp-for="Description" class="col-md-2 col-form-label"></label>
-                <div class="col-md-10">
-                    <textarea id="editor" asp-for="Description" class="form-control">
-                       @Model.Description
-                    </textarea>
-                </div>
-            </div>
-            <div class="form-group row">
-                <label asp-for="Price" class="col-md-2 col-form-label"></label>
-                <div class="col-md-10">
-                    <input asp-for="Price" value="@Model.Price" class="form-control" />
-                </div>
-            </div>
-            <div class="form-group row">
-                <div class="col-md-10 offset-md-2">
-                    <button type="submit" class="btn btn-primary">Save Product</button>
+                <label asp-for="Name" class="col-md-3 col-form-label adminLabel">Product Name</label>
+                <div class="col-md-9">
+                    <input asp-for="Name" class="form-control" name="Name" value="@Model.Name" />
                 </div>
             </div>
 
+            <!--Product Image URL-->
+            <div class="form-group row">
+                <label asp-for="ImageUrl" class="col-md-3 col-form-label adminLabel">Image</label>
+                <div class="col-md-9">
+                    <input asp-for="ImageUrl" type="text" class="form-control" name="ImageURL" value="@Model.ImageUrl" />
+                </div>
+            </div>
 
-        </form>
+            <!--Product Description-->
+            <div class="form-group row">
+                <label asp-for="Description" class="col-md-3 col-form-label adminLabel">Description</label>
+                <div class="col-md-9">
+                    <textarea asp-for="Description" id="editor" class="form-control " name="Description"
+                              value="@Model.Description"></textarea>
+                </div>
+            </div>
+
+            <!--Product Price-->
+            <div class="form-group row">
+                <label asp-for="Price" class="col-md-3 col-form-label adminLabel">Price</label>
+                <div class="col-md-9">
+                    <input asp-for="Price" type="text" class="form-control" name="Price" value="@Model.Price" />
+                </div>
+            </div>
+
+            <!--Add New Product Button-->
+            <div class="form-group row">
+                <div class="col-md-10 offset-md-6">
+                    <button type="submit" value="Save" class="btn btn-primary">Save Product</button>
+                </div>
+            </div>
+        </div>
     </div>
-</div>
+</form>
