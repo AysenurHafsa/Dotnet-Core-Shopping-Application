@@ -6,7 +6,7 @@
 <hr />
 
 <div class="row">
-    <div class="col-md-8">
+    <div class="col-md-4">
         @*Product taki alanlarla alakalı kısımları doldurduk ve  bu kısım admincontrol daki producta gidiyor.*@
 
         <form asp-controller="Admin" asp-action="EditCategory" type="submit" method="post">
@@ -27,5 +27,55 @@
 
 
         </form>
+    </div>
+    <div class="col-md-8">
+
+        @if (Model.Products.Count() > 0)@*direk tabloyu yazmak yerine  modelin icinde products var mı diye kontrol eden if yapısı *@
+        {
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <td style="width:30px;">Id</td>
+                        <td style="width:100px;">Image</td>
+                        <td>Name</td>
+                        <td style="width:12px;">Price</td>
+                        <td style="width:150px;"></td>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.Products)@*Model icerisinden gelen bilgilerle dolduruluyor*@
+                    {
+                        <tr>
+                            <td>@item.Id</td>
+                            <td>
+                                <img src="~/img//@item.ImageUrl" width="80" />
+                            </td>
+                            <td>@item.Name</td>
+                            <td>@item.Price</td>
+                            <td>
+                                <a class="btn btn-primary btn-sm mr-2" href="/admin/editproduct/@item.Id">Edit</a>
+                                <form action="/admin/deleteproduct" method="post" style="display:inline;">
+                                    <input type="hidden" name="productId" value="@item.Id" />
+                                    <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                                </form>
+
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+                <tr>
+                    <td></td>
+                </tr>
+            </table>
+        }
+        else
+        {
+            <div class="alert alert-warning">
+                @*uyarı*@
+                <h4>No Products</h4>
+            </div>
+        }
+
+
     </div>
 </div>
