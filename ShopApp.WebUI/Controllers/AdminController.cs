@@ -138,12 +138,13 @@ namespace ShopApp.WebUI.Controllers
         [HttpGet]
         public IActionResult EditCategory(int id)
         {
-            var entity = _categoryService.GetById(id); //gonderdigimiz category deki bilgiyi alıyoruz
+            var entity = _categoryService.GetByIdWithProducts(id); //gonderdigimiz category deki bilgiyi alıyoruz
 
             return View(new CategoryModel() //kullanıcıya categoryi model olarak gönderiyoruz 
             {
                 Id = entity.Id,   // id ve name i entityden gelen bilgiyle dolduruyoruz model olarak sayfaya gönderiyoruz
-                Name = entity.Name
+                Name = entity.Name,
+                Products =entity.ProductCategories.Select(p=>p.Product).ToList()
             });
         }
         [HttpPost]
