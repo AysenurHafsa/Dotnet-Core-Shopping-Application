@@ -11,7 +11,9 @@ namespace ShopApp.Business.Abstract
     {
          Category GetById(int id); // editcategory icin grekli metodu ekledik
 
-         List<Category> GetAll();
+        Category GetByIdWithProducts(int id);
+
+        List<Category> GetAll();
 
         void Create(Category entity);
 

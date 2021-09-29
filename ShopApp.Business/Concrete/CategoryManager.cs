@@ -38,6 +38,11 @@ namespace ShopApp.Business.Concrete
             return _categoryDal.GetById(id); //istedigimiz id ye karsilik gelen bilgiyi alıyoruz
         }
 
+        public Category GetByIdWithProducts(int id)
+        {
+            return _categoryDal.GetByIdWithProducts(id);
+        }
+
         public void Update(Category entity)
         {
             _categoryDal.Update(entity);

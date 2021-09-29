@@ -8,8 +8,9 @@ using System.Threading.Tasks;
 
 namespace ShopApp.DataAccess.Abstract
 {
-    public interface ICategoryDal:IRepository<Category>
+    public interface ICategoryDal : IRepository<Category>
     {
         // ICategoryDal IRepository içerisindeki bütün metotlara sahip
+        Category GetByIdWithProducts(int id);
     }
 }
