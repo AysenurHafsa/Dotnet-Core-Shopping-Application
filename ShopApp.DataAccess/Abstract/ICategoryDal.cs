@@ -12,5 +12,7 @@ namespace ShopApp.DataAccess.Abstract
     {
         // ICategoryDal IRepository içerisindeki bütün metotlara sahip
         Category GetByIdWithProducts(int id);
+
+        void DeleteFromCategory(int categoryId, int productId);
     }
 }
